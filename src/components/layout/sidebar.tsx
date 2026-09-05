@@ -42,15 +42,31 @@ export function Sidebar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  useEffect(() => {
+    const handleToggle = () => setMobileOpen((prev) => !prev);
+    window.addEventListener("toggle-mobile-sidebar", handleToggle);
+    return () => window.removeEventListener("toggle-mobile-sidebar", handleToggle);
+  }, []);
+
   const NavContent = () => (
     <>
-      <div className="flex h-16 items-center gap-2.5 border-b border-border dark:border-white/10 px-6">
-        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-600 shadow-md shadow-indigo-500/25">
-          <Sparkles className="h-4 w-4 text-white animate-pulse" />
+      <div className="flex h-16 items-center justify-between border-b border-border dark:border-white/10 px-6">
+        <div className="flex items-center gap-2.5">
+          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-600 shadow-md shadow-indigo-500/25">
+            <Sparkles className="h-4 w-4 text-white animate-pulse" />
+          </div>
+          <span className="text-lg font-bold tracking-tight text-foreground">
+            StudyFlow <span className="text-indigo-500 dark:text-indigo-400">AI</span>
+          </span>
         </div>
-        <span className="text-lg font-bold tracking-tight text-foreground">
-          StudyFlow <span className="text-indigo-500 dark:text-indigo-400">AI</span>
-        </span>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="lg:hidden h-8 w-8 text-muted-foreground hover:text-foreground"
+          onClick={() => setMobileOpen(false)}
+        >
+          <X className="h-5 w-5" />
+        </Button>
       </div>
 
       <nav className="flex-1 space-y-1.5 p-4 overflow-y-auto">
@@ -127,26 +143,17 @@ export function Sidebar() {
 
   return (
     <>
-      <Button
-        variant="ghost"
-        size="icon"
-        className="fixed left-4 top-4 z-50 lg:hidden text-foreground hover:bg-accent"
-        onClick={() => setMobileOpen(!mobileOpen)}
-      >
-        {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-      </Button>
-
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm lg:hidden animate-in fade-in duration-200"
           onClick={() => setMobileOpen(false)}
         />
       )}
 
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-40 flex w-64 flex-col border-r border-border dark:border-white/10 bg-card/95 dark:bg-[#0B1020]/90 backdrop-blur-xl transition-transform duration-200 lg:translate-x-0",
-          mobileOpen ? "translate-x-0" : "-translate-x-full"
+          "fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-border dark:border-white/10 bg-card/95 dark:bg-[#0B1020]/95 backdrop-blur-xl transition-transform duration-300 ease-in-out lg:translate-x-0",
+          mobileOpen ? "translate-x-0 shadow-2xl" : "-translate-x-full"
         )}
       >
         <NavContent />

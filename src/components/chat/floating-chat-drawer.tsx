@@ -105,7 +105,7 @@ export function FloatingChatDrawer() {
   ];
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 w-full max-w-md animate-in slide-in-from-bottom-5 duration-200">
+    <div className="fixed bottom-16 sm:bottom-4 right-2 sm:right-4 left-2 sm:left-auto z-50 w-auto sm:w-full max-w-[calc(100vw-16px)] sm:max-w-md animate-in slide-in-from-bottom-5 duration-200">
       <Card className="border shadow-2xl rounded-2xl overflow-hidden backdrop-blur bg-card/95">
         <CardHeader className="p-4 border-b flex flex-row items-center justify-between bg-primary/5">
           <div className="flex items-center gap-2">

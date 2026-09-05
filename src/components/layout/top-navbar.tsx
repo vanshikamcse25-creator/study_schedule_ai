@@ -15,6 +15,7 @@ import {
   User,
   Settings,
   ChevronDown,
+  Menu,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -79,7 +80,17 @@ export function TopNavbar() {
   return (
     <>
       <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60 lg:px-6">
-        <div className="flex items-center gap-4 lg:ml-0 ml-12">
+        <div className="flex items-center gap-2">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden text-foreground hover:bg-accent shrink-0"
+            onClick={() => window.dispatchEvent(new Event("toggle-mobile-sidebar"))}
+            aria-label="Toggle Navigation"
+          >
+            <Menu className="h-5 w-5" />
+          </Button>
+
           <Button
             variant="outline"
             className="hidden sm:flex h-9 w-64 justify-start gap-2 text-muted-foreground"
