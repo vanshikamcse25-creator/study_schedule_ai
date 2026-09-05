@@ -13,8 +13,10 @@ export async function getAuthUserId(req?: NextRequest): Promise<string | null> {
   // 1. Try NextAuth auth() session
   try {
     const session = await auth();
-    if (session?.user?.id) return session.user.id;
-    if ((session?.user as any)?.sub) return (session.user as any).sub;
+    if (session?.user) {
+      if (session.user.id) return session.user.id;
+      if ((session.user as any).sub) return (session.user as any).sub as string;
+    }
   } catch (err) {
     console.warn("auth() call in getAuthUserId:", err);
   }
