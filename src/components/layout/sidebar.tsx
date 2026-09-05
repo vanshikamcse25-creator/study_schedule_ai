@@ -50,7 +50,7 @@ export function Sidebar() {
 
   const NavContent = () => (
     <>
-      <div className="flex h-14 items-center justify-between border-b border-border dark:border-white/10 px-4">
+      <div className="flex h-16 items-center justify-between border-b border-border dark:border-white/10 px-4">
         <div className="flex items-center gap-2">
           <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-tr from-indigo-500 to-purple-600 shadow-md shadow-indigo-500/25">
             <Sparkles className="h-3.5 w-3.5 text-white animate-pulse" />

@@ -15,7 +15,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
       <Sidebar />
       <div className="lg:pl-56 flex flex-col min-h-screen">
         <TopNavbar />
-        <main className="flex-1 p-4 pb-24 lg:p-6 lg:pb-6 relative">
+        <main className="flex-1 p-6 pt-6 lg:p-8 lg:pt-8 pb-24 lg:pb-8 relative max-w-7xl mx-auto w-full">
           <AnimatePresence mode="wait">
             <motion.div
               key={pathname}
