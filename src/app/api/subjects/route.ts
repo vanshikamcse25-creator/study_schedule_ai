@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
       orderBy: { createdAt: "desc" },
     });
 
-    return successResponse(subjects);
+    return successResponse({ subjects });
   } catch {
     return errorResponse("Failed to fetch subjects", 500);
   }
@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
       include: { topics: true },
     });
 
-    return successResponse(subject, 201);
+    return successResponse({ subject }, 201);
   } catch (err: any) {
     console.error("Error creating subject:", err);
     return errorResponse(err?.message ?? "Failed to create subject", 500);

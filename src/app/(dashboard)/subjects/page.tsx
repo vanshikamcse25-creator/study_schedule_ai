@@ -57,7 +57,8 @@ export default function SubjectsPage() {
       const res = await fetch("/api/subjects");
       if (res.ok) {
         const data = await res.json();
-        setSubjects(data.subjects ?? []);
+        const list = Array.isArray(data) ? data : (data.subjects ?? []);
+        setSubjects(list);
       }
     } catch {
       toast.error("Failed to load subjects");

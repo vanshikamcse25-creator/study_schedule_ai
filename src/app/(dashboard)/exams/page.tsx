@@ -60,7 +60,8 @@ export default function ExamsPage() {
 
       if (subjectsRes.ok) {
         const sData = await subjectsRes.json();
-        setSubjects((sData.subjects ?? []).map((s: any) => ({ id: s.id, name: s.name })));
+        const list = Array.isArray(sData) ? sData : (sData.subjects ?? []);
+        setSubjects(list.map((s: any) => ({ id: s.id, name: s.name })));
       }
     } catch {
       toast.error("Failed to load exams");
