@@ -7,6 +7,7 @@ import prisma from "@/lib/db";
 import { loginSchema } from "@/lib/validations";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  trustHost: true,
   secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET || "studyflow_ai_super_secret_auth_key_2026",
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
