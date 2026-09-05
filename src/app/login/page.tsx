@@ -39,10 +39,10 @@ function LoginForm() {
       console.log("SignIn Result:", res);
 
       if (res?.error) {
-        toast.error(`Login failed: ${res.error}`);
+        toast.error("Sign in failed. Please check your credentials.");
       } else {
         toast.success("Welcome back!");
-        window.location.href = callbackUrl;
+        window.location.href = callbackUrl || "/dashboard";
       }
     } catch (err: any) {
       console.error("SignIn Exception:", err);

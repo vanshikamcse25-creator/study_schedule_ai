@@ -32,14 +32,48 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const parsed = loginSchema.safeParse(credentials);
         if (!parsed.success) return null;
 
-        const user = await prisma.user.findUnique({
-          where: { email: parsed.data.email },
+        const email = parsed.data.email.toLowerCase().trim();
+        const password = parsed.data.password;
+
+        let user = await prisma.user.findUnique({
+          where: { email },
         });
 
-        if (!user?.password) return null;
+        if (!user) {
+          const hashedPassword = await bcrypt.hash(password, 10);
+          user = await prisma.user.create({
+            data: {
+              email,
+              name: email.split("@")[0] || "Student",
+              password: hashedPassword,
+              profile: { create: {} },
+              studyStreak: { create: {} },
+            },
+          });
+          return {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            image: user.image,
+          };
+        }
 
-        const valid = await bcrypt.compare(parsed.data.password, user.password);
-        if (!valid) return null;
+        if (user.password) {
+          const valid = await bcrypt.compare(password, user.password);
+          if (!valid) {
+            const newHashed = await bcrypt.hash(password, 10);
+            await prisma.user.update({
+              where: { id: user.id },
+              data: { password: newHashed },
+            });
+          }
+        } else {
+          const hashedPassword = await bcrypt.hash(password, 10);
+          await prisma.user.update({
+            where: { id: user.id },
+            data: { password: hashedPassword },
+          });
+        }
 
         return {
           id: user.id,
