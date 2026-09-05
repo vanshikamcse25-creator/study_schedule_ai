@@ -44,12 +44,12 @@ export function Sidebar() {
 
   const NavContent = () => (
     <>
-      <div className="flex h-16 items-center gap-2.5 border-b border-white/10 px-6">
+      <div className="flex h-16 items-center gap-2.5 border-b border-border dark:border-white/10 px-6">
         <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-600 shadow-md shadow-indigo-500/25">
           <Sparkles className="h-4 w-4 text-white animate-pulse" />
         </div>
-        <span className="text-lg font-bold tracking-tight text-slate-100">
-          StudyFlow <span className="text-indigo-400">AI</span>
+        <span className="text-lg font-bold tracking-tight text-foreground">
+          StudyFlow <span className="text-indigo-500 dark:text-indigo-400">AI</span>
         </span>
       </div>
 
@@ -70,8 +70,8 @@ export function Sidebar() {
                 className={cn(
                   "flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition-all duration-200 relative overflow-hidden",
                   active
-                    ? "bg-indigo-500/15 text-indigo-300 font-semibold border border-indigo-500/30 shadow-lg shadow-indigo-500/10"
-                    : "text-slate-400 hover:bg-white/5 hover:text-slate-200"
+                    ? "bg-indigo-500/15 text-indigo-600 dark:text-indigo-300 font-semibold border border-indigo-500/30 shadow-lg shadow-indigo-500/10"
+                    : "text-muted-foreground hover:bg-accent hover:text-foreground"
                 )}
               >
                 {active && (
@@ -80,7 +80,7 @@ export function Sidebar() {
                     className="absolute left-0 top-1.5 bottom-1.5 w-1 bg-gradient-to-b from-indigo-500 to-purple-500 rounded-r-full shadow-lg shadow-indigo-500/50"
                   />
                 )}
-                <Icon className={cn("h-4 w-4 shrink-0 transition-colors", active ? "text-indigo-400" : "text-slate-400")} />
+                <Icon className={cn("h-4 w-4 shrink-0 transition-colors", active ? "text-indigo-600 dark:text-indigo-400" : "text-muted-foreground")} />
                 <span>{item.label}</span>
               </motion.div>
             </Link>
@@ -88,7 +88,7 @@ export function Sidebar() {
         })}
       </nav>
 
-      <div className="border-t border-white/10 p-4 space-y-1.5">
+      <div className="border-t border-border dark:border-white/10 p-4 space-y-1.5">
         {bottomItems.map((item) => {
           const Icon = item.icon;
           const active = pathname === item.href;
@@ -105,8 +105,8 @@ export function Sidebar() {
                 className={cn(
                   "flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition-all duration-200 relative",
                   active
-                    ? "bg-indigo-500/15 text-indigo-300 font-semibold border border-indigo-500/30"
-                    : "text-slate-400 hover:bg-white/5 hover:text-slate-200"
+                    ? "bg-indigo-500/15 text-indigo-600 dark:text-indigo-300 font-semibold border border-indigo-500/30"
+                    : "text-muted-foreground hover:bg-accent hover:text-foreground"
                 )}
               >
                 {active && (
@@ -115,7 +115,7 @@ export function Sidebar() {
                     className="absolute left-0 top-1.5 bottom-1.5 w-1 bg-gradient-to-b from-indigo-500 to-purple-500 rounded-r-full shadow-lg shadow-indigo-500/50"
                   />
                 )}
-                <Icon className={cn("h-4 w-4 shrink-0 transition-colors", active ? "text-indigo-400" : "text-slate-400")} />
+                <Icon className={cn("h-4 w-4 shrink-0 transition-colors", active ? "text-indigo-600 dark:text-indigo-400" : "text-muted-foreground")} />
                 <span>{item.label}</span>
               </motion.div>
             </Link>
@@ -130,7 +130,7 @@ export function Sidebar() {
       <Button
         variant="ghost"
         size="icon"
-        className="fixed left-4 top-4 z-50 lg:hidden text-slate-200 hover:bg-white/10"
+        className="fixed left-4 top-4 z-50 lg:hidden text-foreground hover:bg-accent"
         onClick={() => setMobileOpen(!mobileOpen)}
       >
         {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -138,21 +138,21 @@ export function Sidebar() {
 
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm lg:hidden animate-in fade-in duration-200"
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden animate-in fade-in duration-200"
           onClick={() => setMobileOpen(false)}
         />
       )}
 
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-40 flex w-64 flex-col border-r border-white/10 bg-[#0B1020]/90 backdrop-blur-xl transition-transform duration-200 lg:translate-x-0",
+          "fixed inset-y-0 left-0 z-40 flex w-64 flex-col border-r border-border dark:border-white/10 bg-card/95 dark:bg-[#0B1020]/90 backdrop-blur-xl transition-transform duration-200 lg:translate-x-0",
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
         <NavContent />
       </aside>
 
-      <aside className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-white/10 lg:bg-[#0B1020]/90 lg:backdrop-blur-xl">
+      <aside className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-border dark:lg:border-white/10 lg:bg-card/95 dark:lg:bg-[#0B1020]/90 lg:backdrop-blur-xl">
         <NavContent />
       </aside>
     </>

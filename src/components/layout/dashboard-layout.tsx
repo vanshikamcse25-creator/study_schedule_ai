@@ -11,7 +11,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   return (
-    <div className="min-h-screen bg-[#060810] text-[#F8FAFC]">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#060810] text-slate-900 dark:text-[#F8FAFC] transition-colors duration-300">
       <Sidebar />
       <div className="lg:pl-64 flex flex-col min-h-screen">
         <TopNavbar />

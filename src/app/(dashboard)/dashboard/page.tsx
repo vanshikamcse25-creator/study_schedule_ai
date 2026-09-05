@@ -222,14 +222,14 @@ export default function DashboardPage() {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="inline-block h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
-              <span className="text-xs font-semibold uppercase tracking-wider text-indigo-400">
+              <span className="text-xs font-semibold uppercase tracking-wider text-indigo-500 dark:text-indigo-400">
                 StudyFlow AI Active
               </span>
             </div>
-            <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-100">
+            <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground">
               {greeting}, {session?.user?.name?.split(" ")[0] ?? "Student"} 👋
             </h1>
-            <p className="text-sm text-slate-400 mt-1">
+            <p className="text-sm text-muted-foreground mt-1">
               Here is your AI study schedule and progress summary for today.
             </p>
           </div>
@@ -259,14 +259,14 @@ export default function DashboardPage() {
           <SpotlightCard spotlightColor="rgba(99, 102, 241, 0.18)">
             <div className="p-5 flex items-center justify-between">
               <div className="space-y-1.5">
-                <span className="text-xs text-slate-400 font-medium uppercase tracking-wider">Study Hours Today</span>
-                <div className="text-2xl font-extrabold text-slate-100">
+                <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Study Hours Today</span>
+                <div className="text-2xl font-extrabold text-foreground">
                   {(stats.completedMinutes / 60).toFixed(1)}{" "}
-                  <span className="text-xs font-normal text-slate-400">/ {(stats.targetMinutes / 60).toFixed(1)} hrs</span>
+                  <span className="text-xs font-normal text-muted-foreground">/ {(stats.targetMinutes / 60).toFixed(1)} hrs</span>
                 </div>
-                <Progress value={Math.min(100, (stats.completedMinutes / stats.targetMinutes) * 100)} className="h-1.5 w-28 bg-slate-800" />
+                <Progress value={Math.min(100, (stats.completedMinutes / stats.targetMinutes) * 100)} className="h-1.5 w-28 bg-muted" />
               </div>
-              <div className="h-11 w-11 rounded-2xl bg-indigo-500/15 text-indigo-400 flex items-center justify-center border border-indigo-500/20 shadow-inner">
+              <div className="h-11 w-11 rounded-2xl bg-indigo-500/15 text-indigo-500 dark:text-indigo-400 flex items-center justify-center border border-indigo-500/20 shadow-inner">
                 <Clock className="h-5 w-5" />
               </div>
             </div>
@@ -275,17 +275,17 @@ export default function DashboardPage() {
           <SpotlightCard spotlightColor="rgba(16, 185, 129, 0.18)">
             <div className="p-5 flex items-center justify-between">
               <div className="space-y-1.5">
-                <span className="text-xs text-slate-400 font-medium uppercase tracking-wider">Completed Sessions</span>
-                <div className="text-2xl font-extrabold text-slate-100">
+                <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Completed Sessions</span>
+                <div className="text-2xl font-extrabold text-foreground">
                   {stats.completedSessionsCount}{" "}
-                  <span className="text-xs font-normal text-slate-400">/ {stats.totalSessionsCount} sessions</span>
+                  <span className="text-xs font-normal text-muted-foreground">/ {stats.totalSessionsCount} sessions</span>
                 </div>
-                <p className="text-[11px] text-emerald-400 font-semibold flex items-center gap-1">
+                <p className="text-[11px] text-emerald-500 dark:text-emerald-400 font-semibold flex items-center gap-1">
                   <CheckCircle2 className="h-3 w-3" />
                   {stats.totalSessionsCount ? Math.round((stats.completedSessionsCount / stats.totalSessionsCount) * 100) : 0}% target reached
                 </p>
               </div>
-              <div className="h-11 w-11 rounded-2xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center border border-emerald-500/20 shadow-inner">
+              <div className="h-11 w-11 rounded-2xl bg-emerald-500/15 text-emerald-500 dark:text-emerald-400 flex items-center justify-center border border-emerald-500/20 shadow-inner">
                 <Target className="h-5 w-5" />
               </div>
             </div>
@@ -294,13 +294,13 @@ export default function DashboardPage() {
           <SpotlightCard spotlightColor="rgba(245, 158, 11, 0.18)">
             <div className="p-5 flex items-center justify-between">
               <div className="space-y-1.5">
-                <span className="text-xs text-slate-400 font-medium uppercase tracking-wider">Study Streak</span>
-                <div className="text-2xl font-extrabold text-slate-100 flex items-center gap-1.5">
+                <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Study Streak</span>
+                <div className="text-2xl font-extrabold text-foreground flex items-center gap-1.5">
                   {stats.streak} Days <Flame className="h-5 w-5 text-amber-500 fill-amber-500 animate-pulse" />
                 </div>
-                <p className="text-[11px] text-slate-400 font-medium">Consistency rank: Top 5% 🔥</p>
+                <p className="text-[11px] text-muted-foreground font-medium">Consistency rank: Top 5% 🔥</p>
               </div>
-              <div className="h-11 w-11 rounded-2xl bg-amber-500/15 text-amber-400 flex items-center justify-center border border-amber-500/20 shadow-inner">
+              <div className="h-11 w-11 rounded-2xl bg-amber-500/15 text-amber-500 dark:text-amber-400 flex items-center justify-center border border-amber-500/20 shadow-inner">
                 <Zap className="h-5 w-5" />
               </div>
             </div>
@@ -309,11 +309,11 @@ export default function DashboardPage() {
           <SpotlightCard spotlightColor="rgba(168, 85, 247, 0.18)">
             <div className="p-5 flex items-center justify-between">
               <div className="space-y-1.5">
-                <span className="text-xs text-slate-400 font-medium uppercase tracking-wider">Level & XP</span>
-                <div className="text-2xl font-extrabold text-slate-100">Lvl {stats.level}</div>
-                <p className="text-[11px] text-purple-400 font-semibold">{stats.xp} XP total earned</p>
+                <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Level & XP</span>
+                <div className="text-2xl font-extrabold text-foreground">Lvl {stats.level}</div>
+                <p className="text-[11px] text-purple-500 dark:text-purple-400 font-semibold">{stats.xp} XP total earned</p>
               </div>
-              <div className="h-11 w-11 rounded-2xl bg-purple-500/15 text-purple-400 flex items-center justify-center border border-purple-500/20 shadow-inner">
+              <div className="h-11 w-11 rounded-2xl bg-purple-500/15 text-purple-500 dark:text-purple-400 flex items-center justify-center border border-purple-500/20 shadow-inner">
                 <GraduationCap className="h-5 w-5" />
               </div>
             </div>
@@ -323,18 +323,18 @@ export default function DashboardPage() {
         {/* AI Smart Recommendation Banner */}
         <motion.div variants={itemVariants}>
           <div className="relative rounded-2xl p-[1px] bg-gradient-to-r from-indigo-500/40 via-purple-500/30 to-cyan-500/40 shadow-lg shadow-indigo-500/10">
-            <div className="rounded-[15px] bg-[#0B1020]/90 backdrop-blur-md p-5 flex items-start gap-4">
+            <div className="rounded-[15px] bg-card border border-border p-5 flex items-start gap-4">
               <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-600 text-white flex items-center justify-center shrink-0 shadow-md shadow-indigo-500/30">
                 <Sparkles className="h-5 w-5 animate-pulse" />
               </div>
               <div className="space-y-1">
-                <h3 className="font-semibold text-sm text-slate-100 flex items-center gap-2">
+                <h3 className="font-semibold text-sm text-foreground flex items-center gap-2">
                   AI Priority Recommendation
-                  <Badge className="bg-indigo-500/20 text-indigo-300 border-indigo-500/30 text-[10px] uppercase font-bold tracking-wider">
+                  <Badge className="bg-indigo-500/20 text-indigo-600 dark:text-indigo-300 border-indigo-500/30 text-[10px] uppercase font-bold tracking-wider">
                     Live AI
                   </Badge>
                 </h3>
-                <p className="text-xs text-slate-300 leading-relaxed">
+                <p className="text-xs text-muted-foreground leading-relaxed">
                   {recommendation}
                 </p>
               </div>
@@ -347,11 +347,11 @@ export default function DashboardPage() {
           {/* Today's Study Timeline */}
           <motion.div variants={itemVariants} className="lg:col-span-2 space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-bold tracking-tight text-slate-100 flex items-center gap-2">
-                <Calendar className="h-5 w-5 text-indigo-400" /> Today&apos;s Study Schedule
+              <h2 className="text-lg font-bold tracking-tight text-foreground flex items-center gap-2">
+                <Calendar className="h-5 w-5 text-indigo-500 dark:text-indigo-400" /> Today&apos;s Study Schedule
               </h2>
               <Link href="/study-plan">
-                <Button variant="ghost" size="sm" className="text-xs gap-1 text-slate-400 hover:text-white hover:bg-slate-800/60">
+                <Button variant="ghost" size="sm" className="text-xs gap-1 text-muted-foreground hover:text-foreground">
                   Full Plan <ArrowRight className="h-3.5 w-3.5" />
                 </Button>
               </Link>
@@ -359,17 +359,17 @@ export default function DashboardPage() {
 
             {loading ? (
               <div className="space-y-3">
-                <Skeleton className="h-20 w-full rounded-2xl bg-slate-800/50" />
-                <Skeleton className="h-20 w-full rounded-2xl bg-slate-800/50" />
+                <Skeleton className="h-20 w-full rounded-2xl bg-muted" />
+                <Skeleton className="h-20 w-full rounded-2xl bg-muted" />
               </div>
             ) : todaySessions.length === 0 ? (
-              <Card className="border border-indigo-500/20 bg-[#0B1020]/60 p-8 text-center space-y-4 backdrop-blur-md">
-                <div className="h-12 w-12 rounded-2xl bg-indigo-500/15 text-indigo-400 flex items-center justify-center mx-auto border border-indigo-500/20">
+              <Card className="border border-indigo-500/20 bg-card p-8 text-center space-y-4 backdrop-blur-md">
+                <div className="h-12 w-12 rounded-2xl bg-indigo-500/15 text-indigo-500 dark:text-indigo-400 flex items-center justify-center mx-auto border border-indigo-500/20">
                   <Sparkles className="h-6 w-6" />
                 </div>
                 <div className="space-y-1">
-                  <h3 className="font-semibold text-base text-slate-100">No Sessions Scheduled Today</h3>
-                  <p className="text-xs text-slate-400 max-w-sm mx-auto">
+                  <h3 className="font-semibold text-base text-foreground">No Sessions Scheduled Today</h3>
+                  <p className="text-xs text-muted-foreground max-w-sm mx-auto">
                     Click below to let StudyFlow AI calculate priorities and generate your optimal study plan.
                   </p>
                 </div>
@@ -389,51 +389,51 @@ export default function DashboardPage() {
                       whileHover={{ scale: 1.01, transition: { duration: 0.15 } }}
                     >
                       <Card
-                        className={`border border-white/10 bg-[#0B1020]/80 shadow-md backdrop-blur-md transition-all ${
+                        className={`border border-border bg-card shadow-sm backdrop-blur-md transition-all ${
                           session.status === "COMPLETED"
-                            ? "opacity-60 bg-slate-900/40 border-white/5"
+                            ? "opacity-60 bg-muted/40"
                             : "hover:border-indigo-500/40 hover:shadow-indigo-500/5"
                         }`}
                       >
                         <CardContent className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                           <div className="flex items-start gap-3.5">
-                            <div className="h-11 w-16 rounded-xl bg-slate-900/90 border border-white/10 flex flex-col items-center justify-center shrink-0">
-                              <span className="text-[11px] font-bold text-indigo-400">{session.startTime}</span>
-                              <span className="text-[9px] text-slate-400">{session.duration} min</span>
+                            <div className="h-11 w-16 rounded-xl bg-accent border border-border flex flex-col items-center justify-center shrink-0">
+                              <span className="text-[11px] font-bold text-indigo-600 dark:text-indigo-400">{session.startTime}</span>
+                              <span className="text-[9px] text-muted-foreground">{session.duration} min</span>
                             </div>
 
                             <div className="space-y-1">
                               <div className="flex items-center gap-2">
-                                <h4 className="font-bold text-sm text-slate-100">
+                                <h4 className="font-bold text-sm text-foreground">
                                   {session.title ?? session.subject?.name ?? "Study Session"}
                                 </h4>
                                 <Badge
                                   variant="outline"
                                   className={`text-[10px] ${
                                     session.status === "COMPLETED"
-                                      ? "bg-slate-800/50 text-slate-400 border-slate-700"
-                                      : "bg-indigo-500/10 text-indigo-300 border-indigo-500/30"
+                                      ? "bg-muted text-muted-foreground border-border"
+                                      : "bg-indigo-500/10 text-indigo-600 dark:text-indigo-300 border-indigo-500/30"
                                   }`}
                                 >
                                   {session.type}
                                 </Badge>
                               </div>
                               {session.reason && (
-                                <p className="text-xs text-slate-400 leading-relaxed">{session.reason}</p>
+                                <p className="text-xs text-muted-foreground leading-relaxed">{session.reason}</p>
                               )}
                             </div>
                           </div>
 
                           <div className="flex items-center gap-2 self-end sm:self-center">
                             {session.status === "COMPLETED" ? (
-                              <Badge className="bg-emerald-500/15 text-emerald-400 border-emerald-500/30 gap-1 text-xs py-1 px-3 font-semibold">
+                              <Badge className="bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30 gap-1 text-xs py-1 px-3 font-semibold">
                                 <Check className="h-3.5 w-3.5" /> Completed
                               </Badge>
                             ) : (
                               <>
                                 <Link href={`/focus?sessionId=${session.id}`}>
-                                  <Button size="sm" variant="outline" className="h-8.5 gap-1.5 text-xs bg-slate-900/80 border-slate-700 text-slate-200 hover:bg-slate-800">
-                                    <Play className="h-3 w-3 fill-indigo-400 text-indigo-400" /> Start
+                                  <Button size="sm" variant="outline" className="h-8.5 gap-1.5 text-xs bg-background border-border text-foreground hover:bg-accent">
+                                    <Play className="h-3 w-3 fill-indigo-500 text-indigo-500 dark:text-indigo-400" /> Start
                                   </Button>
                                 </Link>
                                 <Button
@@ -457,30 +457,30 @@ export default function DashboardPage() {
 
           {/* Sidebar Widgets: Upcoming Exams & Quick Actions */}
           <motion.div variants={itemVariants} className="space-y-6">
-            <Card className="border border-white/10 bg-[#0B1020]/80 shadow-md backdrop-blur-md">
+            <Card className="border border-border bg-card shadow-sm backdrop-blur-md">
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-base text-slate-100 flex items-center gap-2">
-                    <GraduationCap className="h-4.5 w-4.5 text-amber-400" /> Upcoming Exams
+                  <CardTitle className="text-base text-foreground flex items-center gap-2">
+                    <GraduationCap className="h-4.5 w-4.5 text-amber-500 dark:text-amber-400" /> Upcoming Exams
                   </CardTitle>
                   <Link href="/exams">
-                    <Button variant="ghost" size="sm" className="text-xs text-slate-400 hover:text-white">View All</Button>
+                    <Button variant="ghost" size="sm" className="text-xs text-muted-foreground hover:text-foreground">View All</Button>
                   </Link>
                 </div>
               </CardHeader>
               <CardContent className="space-y-3 pt-0">
                 {upcomingExams.length === 0 ? (
-                  <div className="text-center py-6 text-xs text-slate-400">
-                    No upcoming exams added. <Link href="/exams" className="text-indigo-400 hover:underline">Add exam</Link>
+                  <div className="text-center py-6 text-xs text-muted-foreground">
+                    No upcoming exams added. <Link href="/exams" className="text-indigo-500 dark:text-indigo-400 hover:underline">Add exam</Link>
                   </div>
                 ) : (
                   upcomingExams.map((exam) => {
                     const daysLeft = getDaysRemaining(exam.date);
                     return (
-                      <div key={exam.id} className="p-3 border border-white/5 rounded-xl bg-slate-900/60 flex items-center justify-between">
+                      <div key={exam.id} className="p-3 border border-border rounded-xl bg-accent/40 flex items-center justify-between">
                         <div className="space-y-0.5">
-                          <div className="font-semibold text-xs text-slate-100">{exam.title}</div>
-                          <div className="text-[11px] text-slate-400">{exam.subject?.name ?? "General"}</div>
+                          <div className="font-semibold text-xs text-foreground">{exam.title}</div>
+                          <div className="text-[11px] text-muted-foreground">{exam.subject?.name ?? "General"}</div>
                         </div>
                         <Badge
                           variant={daysLeft <= 3 ? "destructive" : daysLeft <= 7 ? "secondary" : "outline"}
@@ -496,29 +496,29 @@ export default function DashboardPage() {
             </Card>
 
             {/* Quick Actions Card */}
-            <Card className="border border-white/10 bg-[#0B1020]/80 shadow-md backdrop-blur-md">
+            <Card className="border border-border bg-card shadow-sm backdrop-blur-md">
               <CardHeader className="pb-3">
-                <CardTitle className="text-base text-slate-100">Quick Shortcuts</CardTitle>
+                <CardTitle className="text-base text-foreground">Quick Shortcuts</CardTitle>
               </CardHeader>
               <CardContent className="grid grid-cols-2 gap-2.5">
                 <Link href="/subjects">
-                  <Button variant="outline" className="w-full justify-start text-xs h-9.5 gap-2 bg-slate-900/60 border-slate-800 text-slate-300 hover:bg-indigo-500/10 hover:border-indigo-500/40">
-                    <BookOpen className="h-3.5 w-3.5 text-indigo-400" /> Subject
+                  <Button variant="outline" className="w-full justify-start text-xs h-9.5 gap-2 bg-background border-border text-foreground hover:bg-indigo-500/10 hover:border-indigo-500/40">
+                    <BookOpen className="h-3.5 w-3.5 text-indigo-500 dark:text-indigo-400" /> Subject
                   </Button>
                 </Link>
                 <Link href="/exams">
-                  <Button variant="outline" className="w-full justify-start text-xs h-9.5 gap-2 bg-slate-900/60 border-slate-800 text-slate-300 hover:bg-amber-500/10 hover:border-amber-500/40">
-                    <GraduationCap className="h-3.5 w-3.5 text-amber-400" /> Exam
+                  <Button variant="outline" className="w-full justify-start text-xs h-9.5 gap-2 bg-background border-border text-foreground hover:bg-amber-500/10 hover:border-amber-500/40">
+                    <GraduationCap className="h-3.5 w-3.5 text-amber-500 dark:text-amber-400" /> Exam
                   </Button>
                 </Link>
                 <Link href="/tasks">
-                  <Button variant="outline" className="w-full justify-start text-xs h-9.5 gap-2 bg-slate-900/60 border-slate-800 text-slate-300 hover:bg-emerald-500/10 hover:border-emerald-500/40">
-                    <Plus className="h-3.5 w-3.5 text-emerald-400" /> Task
+                  <Button variant="outline" className="w-full justify-start text-xs h-9.5 gap-2 bg-background border-border text-foreground hover:bg-emerald-500/10 hover:border-emerald-500/40">
+                    <Plus className="h-3.5 w-3.5 text-emerald-500 dark:text-emerald-400" /> Task
                   </Button>
                 </Link>
                 <Link href="/focus">
-                  <Button variant="outline" className="w-full justify-start text-xs h-9.5 gap-2 bg-slate-900/60 border-slate-800 text-slate-300 hover:bg-purple-500/10 hover:border-purple-500/40">
-                    <Play className="h-3.5 w-3.5 text-purple-400" /> Pomodoro
+                  <Button variant="outline" className="w-full justify-start text-xs h-9.5 gap-2 bg-background border-border text-foreground hover:bg-purple-500/10 hover:border-purple-500/40">
+                    <Play className="h-3.5 w-3.5 text-purple-500 dark:text-purple-400" /> Pomodoro
                   </Button>
                 </Link>
               </CardContent>

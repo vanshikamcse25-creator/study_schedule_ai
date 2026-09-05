@@ -133,17 +133,17 @@ function FocusTimerContent() {
       <div className="pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 h-96 w-96 rounded-full bg-indigo-500/15 blur-[140px]" />
 
       <div className="text-center space-y-2">
-        <Badge className="px-3.5 py-1 text-xs gap-1.5 font-bold uppercase tracking-wider bg-indigo-500/15 text-indigo-300 border-indigo-500/30">
-          <Sparkles className="h-3.5 w-3.5 text-indigo-400 animate-pulse" />
+        <Badge className="px-3.5 py-1 text-xs gap-1.5 font-bold uppercase tracking-wider bg-indigo-500/15 text-indigo-600 dark:text-indigo-300 border-indigo-500/30">
+          <Sparkles className="h-3.5 w-3.5 text-indigo-500 dark:text-indigo-400 animate-pulse" />
           <span>Deep Work Pomodoro Engine</span>
         </Badge>
-        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-100">{sessionTitle}</h1>
-        <p className="text-sm text-slate-400 max-w-md mx-auto">
+        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">{sessionTitle}</h1>
+        <p className="text-sm text-muted-foreground max-w-md mx-auto">
           Eliminate distractions, maintain flow state, and maximize active recall retention.
         </p>
       </div>
 
-      <Card className="border border-white/10 bg-[#0B1020]/90 shadow-2xl backdrop-blur-xl rounded-3xl text-center p-8 space-y-8 relative overflow-hidden">
+      <Card className="border border-border bg-card shadow-2xl backdrop-blur-xl rounded-3xl text-center p-8 space-y-8 relative overflow-hidden">
         {/* Active phase pills */}
         <div className="flex items-center justify-center gap-3">
           <Button
@@ -153,7 +153,7 @@ function FocusTimerContent() {
             className={`rounded-full px-5 text-xs font-semibold ${
               preset === "25_5"
                 ? "bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-500/20"
-                : "bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200"
+                : "bg-background border-border text-muted-foreground hover:text-foreground"
             }`}
           >
             25 / 5 Standard
@@ -165,15 +165,15 @@ function FocusTimerContent() {
             className={`rounded-full px-5 text-xs font-semibold ${
               preset === "50_10"
                 ? "bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-500/20"
-                : "bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200"
+                : "bg-background border-border text-muted-foreground hover:text-foreground"
             }`}
           >
             50 / 10 Deep Focus
           </Button>
         </div>
 
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-white/10 text-xs font-bold uppercase tracking-wider text-slate-300">
-          <span className={`h-2.5 w-2.5 rounded-full ${mode === "work" ? "bg-indigo-400 animate-ping" : "bg-emerald-400"}`} />
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent border border-border text-xs font-bold uppercase tracking-wider text-foreground">
+          <span className={`h-2.5 w-2.5 rounded-full ${mode === "work" ? "bg-indigo-500 dark:bg-indigo-400 animate-ping" : "bg-emerald-500 dark:bg-emerald-400"}`} />
           <span>{mode === "work" ? "Focused Study Phase" : "Rest & Break Phase"}</span>
         </div>
 
@@ -186,7 +186,7 @@ function FocusTimerContent() {
                 cx="144"
                 cy="144"
                 r={radius}
-                className="stroke-slate-800/80"
+                className="stroke-muted"
                 strokeWidth="10"
                 fill="transparent"
               />
@@ -209,11 +209,11 @@ function FocusTimerContent() {
 
             {/* Inner Clock Text */}
             <div className="absolute flex flex-col items-center justify-center text-center">
-              <div className="text-6xl sm:text-7xl font-black font-mono tracking-tighter text-slate-100 drop-shadow-md">
+              <div className="text-6xl sm:text-7xl font-black font-mono tracking-tighter text-foreground drop-shadow-md">
                 {formatTime(timeLeft)}
               </div>
-              <p className="text-xs text-slate-400 mt-2 font-medium flex items-center gap-1">
-                <Zap className="h-3.5 w-3.5 text-amber-400" />
+              <p className="text-xs text-muted-foreground mt-2 font-medium flex items-center gap-1">
+                <Zap className="h-3.5 w-3.5 text-amber-500 dark:text-amber-400" />
                 {mode === "work" ? `${workMinutes} min focus target` : `${breakMinutes} min rest interval`}
               </p>
             </div>
