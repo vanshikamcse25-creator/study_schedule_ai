@@ -40,7 +40,8 @@ export async function POST(req: NextRequest) {
     });
 
     return successResponse(subject, 201);
-  } catch {
-    return errorResponse("Failed to create subject", 500);
+  } catch (err: any) {
+    console.error("Error creating subject:", err);
+    return errorResponse(err?.message ?? "Failed to create subject", 500);
   }
 }
