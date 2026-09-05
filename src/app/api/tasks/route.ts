@@ -3,9 +3,9 @@ import { getAuthUser, errorResponse, successResponse } from "@/lib/api-utils";
 import prisma from "@/lib/db";
 import { taskSchema } from "@/lib/validations";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
-    const user = await getAuthUser();
+    const user = await getAuthUser(req);
     if (!user) return errorResponse("Unauthorized", 401);
 
     const tasks = await prisma.task.findMany({
@@ -22,7 +22,7 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    const user = await getAuthUser();
+    const user = await getAuthUser(req);
     if (!user) return errorResponse("Unauthorized", 401);
 
     const body = await req.json();

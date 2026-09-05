@@ -5,7 +5,7 @@ import { generatePlanSchema } from "@/lib/validations";
 
 export async function POST(req: NextRequest) {
   try {
-    const userId = await requireAuthUserId();
+    const userId = await requireAuthUserId(req);
     if (typeof userId !== "string") return userId;
 
     const body = await req.json().catch(() => ({}));

@@ -5,7 +5,7 @@ import { studySessionSchema } from "@/lib/validations";
 
 export async function GET(req: NextRequest) {
   try {
-    const user = await getAuthUser();
+    const user = await getAuthUser(req);
     if (!user) return errorResponse("Unauthorized", 401);
 
     const { searchParams } = new URL(req.url);
@@ -42,7 +42,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const user = await getAuthUser();
+    const user = await getAuthUser(req);
     if (!user) return errorResponse("Unauthorized", 401);
 
     const body = await req.json();
