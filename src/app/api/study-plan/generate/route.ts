@@ -1,18 +1,18 @@
 import { NextRequest } from "next/server";
-import { getAuthUser, errorResponse, successResponse } from "@/lib/api-utils";
+import { requireAuthUserId, errorResponse, successResponse } from "@/lib/api-utils";
 import { generatePlan } from "@/lib/services/study-plan";
 import { generatePlanSchema } from "@/lib/validations";
 
 export async function POST(req: NextRequest) {
   try {
-    const user = await getAuthUser();
-    if (!user) return errorResponse("Unauthorized", 401);
+    const userId = await requireAuthUserId();
+    if (typeof userId !== "string") return userId;
 
     const body = await req.json().catch(() => ({}));
     const parsed = generatePlanSchema.safeParse(body);
     const days = parsed.success && parsed.data.days ? parsed.data.days : 7;
 
-    const result = await generatePlan(user.id, days);
+    const result = await generatePlan(userId, days);
 
     return successResponse({
       message: "Study plan generated successfully",

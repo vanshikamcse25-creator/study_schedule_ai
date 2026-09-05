@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function getAuthUserId(): Promise<string | null> {
   const session = await auth();
-  return session?.user?.id ?? null;
+  return session?.user?.id ?? (session?.user as any)?.sub ?? null;
 }
 
 export async function getAuthUser(): Promise<{ id: string } | null> {
@@ -15,7 +15,7 @@ export async function getAuthUser(): Promise<{ id: string } | null> {
 
 export async function requireAuthUserId(): Promise<string | NextResponse> {
   const session = await auth();
-  const userId = session?.user?.id;
+  const userId = session?.user?.id ?? (session?.user as any)?.sub;
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -26,9 +26,9 @@ export async function requireAuthUserId(): Promise<string | NextResponse> {
       await prisma.user.create({
         data: {
           id: userId,
-          email: session.user.email ?? `${userId}@studyflow.ai`,
-          name: session.user.name ?? "Student",
-          image: session.user.image,
+          email: session?.user?.email ?? `${userId}@studyflow.ai`,
+          name: session?.user?.name ?? "Student",
+          image: session?.user?.image,
         },
       });
     }
