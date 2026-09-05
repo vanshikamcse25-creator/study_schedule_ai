@@ -13,7 +13,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-[#060810] text-slate-900 dark:text-[#F8FAFC] transition-colors duration-300">
       <Sidebar />
-      <div className="lg:pl-64 flex flex-col min-h-screen">
+      <div className="lg:pl-56 flex flex-col min-h-screen">
         <TopNavbar />
         <main className="flex-1 p-4 pb-24 lg:p-6 lg:pb-6 relative">
           <AnimatePresence mode="wait">
