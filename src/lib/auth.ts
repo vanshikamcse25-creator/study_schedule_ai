@@ -6,6 +6,18 @@ import bcrypt from "bcryptjs";
 import prisma from "@/lib/db";
 import { loginSchema } from "@/lib/validations";
 
+// Fix for Vercel dynamic host resolution: ensure AUTH_URL always matches the active Vercel deployment URL
+if (process.env.VERCEL_URL) {
+  const currentHost = process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL;
+  if (currentHost && !currentHost.includes("localhost")) {
+    const currentUrl = `https://${currentHost}`;
+    if (!process.env.AUTH_URL || !process.env.AUTH_URL.includes(currentHost)) {
+      process.env.AUTH_URL = currentUrl;
+      process.env.NEXTAUTH_URL = currentUrl;
+    }
+  }
+}
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
   trustHost: true,
   secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET || "studyflow_ai_super_secret_auth_key_2026",
