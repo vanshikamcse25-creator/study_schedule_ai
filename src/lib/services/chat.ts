@@ -106,7 +106,17 @@ export async function sendChatMessage(userId: string, message: string, conversat
 }
 
 function generateFallbackResponse(message: string, context: string): string {
-  const lower = message.toLowerCase();
+  const lower = message.toLowerCase().trim();
+
+  // Handle greetings & casual messages
+  const greetings = ["hi", "hii", "hiii", "hello", "hey", "heyy", "greetings", "good morning", "good afternoon", "good evening", "sup", "yo", "howdy"];
+  if (greetings.includes(lower) || lower.match(/^(hi+|hello+|hey+)\b/i)) {
+    return "Hello! 👋 I am your **StudyFlow AI Tutor & Assistant**.\n\nI can help you with your study schedule, subject progress, exam preparation, or explaining concepts. What would you like help with today?";
+  }
+
+  if (lower.includes("who are you") || lower === "help" || lower.includes("what can you do")) {
+    return "I am **StudyFlow AI Assistant**, your personal study tutor and schedule planner! Here is how I can help:\n\n1. **Daily Priorities**: Ask *\"What should I study today?\"*\n2. **Time Management**: Ask *\"I only have 2 hours today. What should I prioritize?\"*\n3. **Exam Revision**: Ask *\"My exam is in 5 days. Make a revision plan.\"*\n4. **Concept Explanations**: Ask *\"Explain binary search trees simply.\"*\n5. **Knowledge Quizzes**: Ask *\"Quiz me on Database normalization.\"*\n6. **Missed Sessions**: Ask *\"I missed yesterday's schedule. Fix my plan.\"*";
+  }
 
   if (lower.includes("2 hours") || lower.includes("limited time") || lower.includes("short time")) {
     return "With **2 hours** available today, here is your optimal split:\n\n1. **Block 1 (50 min)**: Deep focus on your lowest-progress subject topic.\n2. **Break (10 min)**: Rest and hydration.\n3. **Block 2 (40 min)**: Active practice / problem solving.\n4. **Review (20 min)**: Quick summary and flashcards.";
@@ -146,15 +156,13 @@ function generateFallbackResponse(message: string, context: string): string {
     return "Based on your current study schedule, prioritize your highest-difficulty subject today. Allocate 60 minutes for active learning followed by a 10-minute break.";
   }
 
-  if (lower.includes("missed") || lower.includes("fix my plan") || lower.includes("yesterday")) {
-    return "No worries! To reschedule missed sessions:\n\n1. Go to your **Study Plan** page.\n2. Click the **Reschedule** button on any missed block.\n3. Choose **Reschedule Automatically** to let StudyFlow AI rebalance your remaining slots for this week without overloading your daily hours.";
-  }
-
-  // Dynamic roadmap response for ANY topic, question, or skill requested by the user
   const topicClean = message.replace(/i want to learn|how to learn|tell me about|explain|what is|how do i|i want to/gi, "").trim();
-  const topicTitle = topicClean.length > 0 ? topicClean.charAt(0).toUpperCase() + topicClean.slice(1) : "this topic";
+  const lowerTopic = topicClean.toLowerCase();
+  const fillerWords = ["ok", "okay", "thanks", "thank you", "cool", "sure", "great", "nice", "hello", "hi", "hii"];
 
-  return `Here is a structured study roadmap to master **${topicTitle}** efficiently:
+  if (topicClean.length > 3 && !fillerWords.includes(lowerTopic)) {
+    const topicTitle = topicClean.charAt(0).toUpperCase() + topicClean.slice(1);
+    return `Here is a structured study roadmap to master **${topicTitle}** efficiently:
 
 1. **Foundations (Phase 1)**:
    - Understand core terminology, principles, and high-level architecture of ${topicTitle}.
@@ -169,6 +177,9 @@ function generateFallbackResponse(message: string, context: string): string {
    - Review weak areas and quiz yourself on edge cases.
 
 Would you like me to add **${topicTitle}** to your subjects list on StudyFlow AI?`;
+  }
+
+  return "I am here to help you study! Ask me to explain a concept, create a revision roadmap, quiz you on a topic, or tell you what to study today based on your schedule.";
 }
 
 export async function createConversation(userId: string, title?: string) {
